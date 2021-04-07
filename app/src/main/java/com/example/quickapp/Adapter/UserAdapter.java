@@ -40,6 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
         Users users=usersArrayList.get(position);
         holder.user_name.setText(users.name);
         holder.user_status.setText(users.status);
+
         Picasso.get().load(users.imageUri).into(holder.user_image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

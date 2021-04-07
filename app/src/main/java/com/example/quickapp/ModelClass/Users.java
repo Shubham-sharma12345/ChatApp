@@ -3,10 +3,10 @@ package com.example.quickapp.ModelClass;
 public class Users {
 
     String uid;
-    String name;
+    public String name;
     String email;
-    String imageUri;
-    String status;
+    public String imageUri;
+    public String status;
 
     public Users() {
     }

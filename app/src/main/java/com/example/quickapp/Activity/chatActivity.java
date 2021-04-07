@@ -3,14 +3,17 @@ package com.example.quickapp.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quickapp.Adapter.MessagesAdapter;
 import com.example.quickapp.ModelClass.Messages;
 import com.example.quickapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +44,7 @@ public static String sImage;
     String senderRoom,recieverRoom;
     RecyclerView messageAdapter;
     ArrayList<Messages> messagesArrayList;
+    MessagesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,11 @@ public static String sImage;
         profileImage=findViewById(R.id.profile_image);
         recievername=findViewById(R.id.recievername);
         messageAdapter=findViewById(R.id.messageAdapter);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        messageAdapter.setLayoutManager(linearLayoutManager);
+        adapter=new MessagesAdapter(chatActivity.this,messagesArrayList);
+        messageAdapter.setAdapter(adapter);
         sendbtn=findViewById(R.id.send_btn);
         edmessage=findViewById(R.id.editMessage);
 
@@ -78,7 +87,7 @@ public static String sImage;
                     Messages messages=dataSnapshot.getValue(Messages.class);
                     messagesArrayList.add(messages);
                 }
-
+               adapter.notifyDataSetChanged();
             }
 
             @Override
